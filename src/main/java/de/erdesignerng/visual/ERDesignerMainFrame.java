@@ -23,6 +23,7 @@ import de.erdesignerng.modificationtracker.HistoryModificationTracker;
 import de.erdesignerng.util.ApplicationPreferences;
 import de.erdesignerng.util.MavenPropertiesLocator;
 import de.erdesignerng.visual.common.*;
+import de.erdesignerng.visual.common.SaveToFileCommand;
 import de.erdesignerng.visual.editor.exception.ExceptionEditor;
 import de.mogwai.common.client.looks.UIInitializer;
 import de.mogwai.common.client.looks.components.DefaultFrame;
@@ -33,6 +34,8 @@ import org.apache.log4j.Logger;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  * @author $Author: mirkosertic $
@@ -62,8 +65,14 @@ public class ERDesignerMainFrame extends DefaultFrame implements
 
             @Override
             public void windowClosing(WindowEvent e) {
-                exitApplication();
-            }
+                int confirmed = JOptionPane.showConfirmDialog(null, 
+                "Save the project before exit?",
+                "Alert before exit!", JOptionPane.YES_NO_OPTION);
+                
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    exitApplication();
+                }
+             }   
         });
 
         UIInitializer.getInstance().initialize(this);
@@ -209,4 +218,6 @@ public class ERDesignerMainFrame extends DefaultFrame implements
     public void commandOpenFile(File aFile) {
         component.commandOpenFile(aFile);
     }
+
+    
 }
