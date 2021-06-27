@@ -67,10 +67,11 @@ public class ERDesignerMainFrame extends DefaultFrame implements
             public void windowClosing(WindowEvent e) {
                 int confirmed = JOptionPane.showConfirmDialog(null, 
                 "Save the project before exit?",
-                "Alert before exit!", JOptionPane.YES_NO_OPTION);
+                "Alert before exit!", JOptionPane.YES_NO_OPTION);  
+                SaveToFileCommand save = new SaveToFileCommand();
                 
                 if (confirmed == JOptionPane.YES_OPTION) {
-                    exitApplication();
+                    save.execute();
                 }
              }   
         });
